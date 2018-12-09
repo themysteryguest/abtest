@@ -35,7 +35,7 @@ return [
 
         'conn_abtest' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', '127.0.0.1'),
+            'host' => env('DB_HOST', 'localhost'),
             'port' => env('DB_PORT', '33060'),
             'database' => env('DB_DATABASE', 'abtest'),
             'username' => env('DB_USERNAME', 'homestead'),

@@ -7,9 +7,10 @@
             <div class='col-lg-6 offset-lg-3'>
                 <h4>Upload Projects File</h4>
                 <hr>
-                <div>
+                <div class="mb-3">
                     Please select the xml file you wish to load using the form below. The file should be in the following format:
-                    <pre>
+                    <textarea rows="12" cols="70" disabled="true" style="border: none; ">
+                        <?xml version="1.0" encoding="UTF-8"?>
                         <projects>
                           <project>
                             <name>Project 1</name>
@@ -20,7 +21,7 @@
                             <description>This is the description of Project 2</description>
                           </project>
                         </projects>
-                    </pre>
+                    </textarea>
                 </div>
 
                 {!! Form::open(array('route' => 'upload-projects','enctype' => 'multipart/form-data')) !!}

@@ -18,9 +18,7 @@ class ProjectController extends Controller
     public function index()
     {
         //Used by the API to display a list of projects
-        $projects = Project::get();
-        return ProjectResource::collection($projects); //TODO would be a good idea to add pagination for large project lists
-
+        return ProjectResource::collection(Project::simplePaginate(2)); //Return 20 results per call - returned json contains page link info
 
     }
 
@@ -69,7 +67,7 @@ class ProjectController extends Controller
                 ['project_name' => $project->name, 'project_description' => $project->description]
             );
 
-            return redirect()->route('projects.index')
+            return redirect('/')
                 ->with('flash_message', 'The new projects were successfully imported.');
 
         }
@@ -85,9 +83,11 @@ class ProjectController extends Controller
     public function show($projectId)
     {
 
+
+
         //display the specified project
-        $project = Project::where('id', $projectId);
-        return ProjectResource::collection($project);
+        $project = Project::where('id', $projectId)->first();
+        return new ProjectResource($project);
     }
 
     /**
