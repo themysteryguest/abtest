@@ -18,7 +18,7 @@ class ProjectController extends Controller
     public function index()
     {
         //Used by the API to display a list of projects
-        return ProjectResource::collection(Project::simplePaginate(2)); //Return 20 results per call - returned json contains page link info
+        return ProjectResource::collection(Project::simplePaginate(20)); //Return 20 results per call - returned json contains page link info
 
     }
 
