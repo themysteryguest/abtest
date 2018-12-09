@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Project;
+use App\Http\Resources\ProjectResource;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
 {
@@ -13,7 +17,11 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        //Used by the API to display a list of projects
+        $projects = Project::get();
+        return ProjectResource::collection($projects); //TODO would be a good idea to add pagination for large project lists
+
+
     }
 
     /**
@@ -74,9 +82,12 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($projectId)
     {
-        //
+
+        //display the specified project
+        $project = Project::where('id', $projectId);
+        return ProjectResource::collection($project);
     }
 
     /**

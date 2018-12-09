@@ -4,12 +4,12 @@
 
     <div class="container">
         <div class="row">
-            <div class='col-lg-4 offset-lg-4'>
+            <div class='col-lg-6 offset-lg-3'>
                 <h4>Upload Projects File</h4>
                 <hr>
                 <div>
                     Please select the xml file you wish to load using the form below. The file should be in the following format:
-                    <pre lang="xml">
+                    <pre>
                         <projects>
                           <project>
                             <name>Project 1</name>
@@ -24,8 +24,12 @@
                 </div>
 
                 {!! Form::open(array('route' => 'upload-projects','enctype' => 'multipart/form-data')) !!}
-                {!! Form::file('projects_xml_file') !!}
-                {!! Form::submit('Load Projects', array('class' => 'btn btn-primary')) !!}
+                <div class="form-group">
+                    {!! Form::file('projects_xml_file') !!}
+                </div>
+                <div class="form-group">
+                    {!! Form::submit('Upload Project File', array('class' => 'btn btn-primary')) !!}
+                </div>
                 {!! Form::close() !!}
 
             </div>

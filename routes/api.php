@@ -13,6 +13,12 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+//login endpoint - if username and password match an entry in the users table a token is returned, which can be used for subsequent api calls
+Route::get('/login', 'ApiController@login')->name('login');
+
+
+Route::middleware('auth:api')->group(function() {
+    Route::get('projects','ProjectController@index'); //full project list
+    Route::get('projects/{projectId}','ProjectController@show'); //show the specified project
 });
+
