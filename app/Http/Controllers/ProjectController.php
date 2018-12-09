@@ -42,8 +42,19 @@ class ProjectController extends Controller
     {
         //Use the store method to process and parse the uploaded XML
 
-        //TODO - add empty field, file format validation here, also could validate xml structure
-        //TODO - copy file to folder and process from there
+        //Validation - check for empty file field, check file type, check for 2MB max file if limited by php config
+        $rules = [
+            //'projects_xml_file' => 'required|mimes:xml' //TODO mimes validation not working for valid xml file so excluding for now
+            'projects_xml_file' => 'required'
+        ];
+
+        $customMessages = [
+            'required' => 'Please select an XML file to upload.',
+//            'mimes' => 'The uploaded file must be in XML format and have a .xml extension.'
+        ];
+
+        $this->validate($request, $rules, $customMessages);
+        //TODO - could validate xml structure
 
         $projects_xml_file = $request->file('projects_xml_file');
 
@@ -61,7 +72,7 @@ class ProjectController extends Controller
 
             //TODO collect and report on empty fields
             //TODO check for duplicates and exclude(?)
-            //TODO handle large data sets
+            //TODO handle large data sets - chunking
 
             DB::table('projects')->insert(
                 ['project_name' => $project->name, 'project_description' => $project->description]

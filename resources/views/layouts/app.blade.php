@@ -30,6 +30,12 @@
         </div>
     @endif
 
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            @include ('errors.list') {{-- Including error file --}}
+        </div>
+    </div>
+
     <main class="py-4">
         @yield('content')
     </main>

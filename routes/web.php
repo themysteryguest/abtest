@@ -15,4 +15,5 @@ Route::get('/', function () {
      return view('projects');
 });
 
+
 Route::post('/upload-projects', array('uses'=>'ProjectController@store','as'=>'upload-projects'));
