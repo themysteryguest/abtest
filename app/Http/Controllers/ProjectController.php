@@ -36,9 +36,18 @@ class ProjectController extends Controller
     {
         //Use the store method to process and parse the uploaded XML
 
-        //TODO - add file format validation here
+        //TODO - add empty field, file format validation here, also could validate xml structure
+        //TODO - copy file to folder and process from there
 
-        $xml = simplexml_load_file($request->file('project_xml_file')->getRealPath());
+        $projects_xml_file = $request->file('projects_xml_file');
+
+        //move the file into the storage folder
+        $destinationPath = storage_path('app/uploads');
+        $input['filename'] = time().'_'.$projects_xml_file->getClientOriginalName(); //add timestamp to filename
+        $projects_xml_file->move($destinationPath, $input['filename']); //TODO check for successful move
+
+        //open and read the file
+        $xml = simplexml_load_file($destinationPath."/".$input['filename']);
 
         foreach($xml->children() as $project) {
 
@@ -49,7 +58,7 @@ class ProjectController extends Controller
             //TODO handle large data sets
 
             DB::table('projects')->insert(
-                ['project_name' => $project->project_name, 'project_description' => $project->project_description]
+                ['project_name' => $project->name, 'project_description' => $project->description]
             );
 
             return redirect()->route('projects.index')

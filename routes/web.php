@@ -12,8 +12,7 @@
 */
 
 Route::get('/', function () {
-     return view('home');
+     return view('projects');
 });
 
-
-//Route::get('/test', 'Home@index');
+Route::post('/upload-projects', array('uses'=>'ProjectController@store','as'=>'upload-projects'));
